@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+	<!-- Remove CMUpdater - Unofficial Builds -->
+	<remove-project name="CyanogenMod/android_packages_apps_CMUpdater" />
+	<!-- THLG Display CAF -->
+	<remove-project name="CyanogenMod/android_hardware_qcom_display-caf" />
+	<project path="hardware/qcom/display-caf" name="TeamHackLG/android_hardware_qcom_display-caf" revision="cm-11.0" />
+	<!-- Team Vee TWRP -->
+	<project path="bootable/recovery-omni" name="TeamVee/android_bootable_recovery" revision="android-4.4" />
+	<!-- Project Vee3 -->
+	<project path="device/lge/vee3" name="TeamVee/android_device_lge_vee3" revision="cm-11.0" />
+	<project path="vendor/lge-vee3" name="TeamVee/android_vendor_lge-vee3" revision="cm-11.0" />
+	<project path="kernel/lge/VeeKernel" name="TeamVee/VeeKernel" revision="rel" />
+</manifest>
