@@ -13,3 +13,15 @@ To initialize Vee3 Repo's:
 To sync:
 
     repo sync
+
+To apply patchs:
+
+     device/lge/vee3/patches/apply.sh
+
+To initialize the environment
+
+    . build/envsetup.sh
+
+To build:
+
+    brunch vee3
