@@ -1,10 +1,10 @@
-CM11 Manifest - Project Vee3
+CM11 Manifests - Project Vee
 ========================
-Local manifests to build Android KitKat 4.4 to L3 II Single/Dual
-
+Project V1 / Project Vee3 / Project Vee7
+Local manifests to build Android KitKat 4.4 to L1II, L3II and L7II
 To initialize CM11 Repo:
 
-    repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0
+    repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0 -g all,-notdefault,-darwin
 
 To initialize Vee3 Repo's:
 
@@ -16,12 +16,20 @@ To sync:
 
 To apply patchs:
 
-     device/lge/vee3/patches/apply.sh
+     device/lge/vee-common/patches/apply.sh
 
 To initialize the environment
 
     . build/envsetup.sh
 
-To build:
+To build for v1 (Not Work - To be BringUp):
+
+    brunch v1
+
+To build for vee3:
 
     brunch vee3
+
+To build for vee7 (Not Work - To be BringUp):
+
+    brunch vee7
