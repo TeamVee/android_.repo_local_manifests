@@ -1,7 +1,9 @@
 CM11 Manifests - Project Vee
 ========================
 Project V1 / Project Vee3 / Project Vee7
+
 Local manifests to build Android KitKat 4.4 to L1II, L3II and L7II
+
 To initialize CM11 Repo:
 
     repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0 -g all,-notdefault,-darwin
