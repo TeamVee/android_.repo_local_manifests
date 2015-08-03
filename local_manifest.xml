@@ -10,8 +10,14 @@
 	<project path="hardware/qcom/display-caf" name="android_hardware_qcom_display-caf" revision="cm-11.0" remote="thlg" />
 	<!-- Team Vee TWRP -->
 	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="android-4.4" remote="tv" />
+	<!-- Project V1 -->
+	<!--project path="device/lge/v1" name="android_device_lge_v1" revision="cm-11.0" remote="tv" /-->
 	<!-- Project Vee3 -->
 	<project path="device/lge/vee3" name="android_device_lge_vee3" revision="cm-11.0" remote="tv" />
-	<project path="vendor/lge-vee3" name="android_vendor_lge-vee3" revision="cm-11.0" remote="tv" />
+	<!-- Project Vee7 -->
+	<!--project path="device/lge/vee7" name="android_device_lge_vee7" revision="cm-11.0" remote="tv" /-->
+	<!-- Project Vee -->
+	<project path="device/lge/vee-common" name="android_device_lge_vee-common" revision="cm-11.0" remote="tv" />
+	<project path="vendor/lge-vee" name="android_vendor_lge-vee" revision="cm-11.0" remote="tv" />
 	<project path="kernel/lge/msm7x27a-common" name="lge-kernel-lproj" revision="android-msm-3.4-kk" remote="tv" />
 </manifest>
