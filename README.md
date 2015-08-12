@@ -1,4 +1,4 @@
-CM11 Manifests - Project Vee
+CM11 Manifests
 ========================
 Project V1 / Project Vee3 / Project Vee7
 
