@@ -17,7 +17,7 @@
 	<!-- Project Vee7 -->
 	<project path="device/lge/vee7" name="android_device_lge_vee7" revision="cm-11.0" remote="tv" />
 	<!-- Project Vee -->
+	<project path="vendor/lge" name="android_vendor_lge" revision="cm-11.0" remote="tv" />
 	<project path="device/lge/vee-common" name="android_device_lge_vee-common" revision="cm-11.0" remote="tv" />
-	<project path="vendor/lge-vee" name="android_vendor_lge-vee" revision="cm-11.0" remote="tv" />
 	<project path="kernel/lge/msm7x27a-common" name="lge-kernel-lproj" revision="android-msm-3.4-kk" remote="tv" />
 </manifest>
