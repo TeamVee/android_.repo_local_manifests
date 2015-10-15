@@ -1,8 +1,8 @@
 CM11 Manifests
 ========================
-Project M4 / Project U0 / Project V1 / Project Vee3 / Project Vee7
+Project M4 / Project U0 / Project V1 / Project Vee3
 
-Local manifests to build Android KitKat 4.4 to L5, L7, L1II, L3II and L7II
+Local manifests to build Android KitKat 4.4 to L5, L7, L1II and L3II
 
 To initialize CM11 Repo:
 
@@ -39,7 +39,3 @@ To build for L1 II:
 To build for L3 II:
 
     brunch vee3
-
-To build for L7 II (Testing...):
-
-    brunch vee7
