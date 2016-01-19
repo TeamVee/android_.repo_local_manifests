@@ -18,7 +18,7 @@ To sync:
 
 To apply patchs:
 
-     device/lge/vee-common/patches/apply.sh
+    sh device/lge/vee-common/patches/apply.sh
 
 To initialize the environment
 
