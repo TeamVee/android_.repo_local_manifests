@@ -3,8 +3,9 @@
 	<!-- Remote names -->
 	<remote name="thlg" fetch="https://github.com/TeamHackLG/" />
 	<remote name="tv" fetch="https://github.com/TeamVee/" />
-	<!-- Remove CMUpdater - Unofficial Builds -->
+	<!-- Unofficial Builds -->
 	<remove-project name="CyanogenMod/android_packages_apps_CMUpdater" />
+	<project path="packages/apps/CMAccount" name="CyanogenMod/android_packages_apps_CMAccount" />
 	<!-- Remove CMUpdater - Unofficial Builds -->
 	<remove-project name="CyanogenMod/android_prebuilt" />
 	<!-- THLG Display CAF -->
