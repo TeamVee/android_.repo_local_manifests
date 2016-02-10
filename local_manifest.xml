@@ -5,9 +5,8 @@
 	<remote name="tv" fetch="https://github.com/TeamVee/" />
 	<!-- Unofficial Builds -->
 	<remove-project name="CyanogenMod/android_packages_apps_CMUpdater" />
-	<project path="packages/apps/CMAccount" name="CyanogenMod/android_packages_apps_CMAccount" />
-	<!-- Remove CMUpdater - Unofficial Builds -->
 	<remove-project name="CyanogenMod/android_prebuilt" />
+	<project path="packages/apps/CMAccount" name="CyanogenMod/android_packages_apps_CMAccount" />
 	<!-- THLG Display CAF -->
 	<remove-project name="CyanogenMod/android_hardware_qcom_display-caf" />
 	<project path="hardware/qcom/display-caf" name="android_hardware_qcom_display-caf" revision="cm-11.0" remote="thlg" />
