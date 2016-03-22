@@ -10,7 +10,7 @@
 	<remove-project name="CyanogenMod/android_hardware_qcom_display-caf" />
 	<project path="hardware/qcom/display-caf" name="android_hardware_qcom_display-caf" revision="cm-11.0" remote="thlg" />
 	<!-- Team Vee TWRP -->
-	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="android-4.4" remote="tv" />
+	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="cm-11.0" remote="tv" />
 	<!-- Vee Projects -->
 	<project path="device/lge/vee-common" name="android_device_lge_vee-common" revision="cm-11.0" remote="tv" />
 	<project path="device/lge/v1" name="android_device_lge_v1" revision="cm-11.0" remote="tv" />
