@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 	<!-- Remote names -->
-	<remote name="thlg" fetch="https://github.com/TeamHackLG/" />
+	<remote name="cm" fetch="https://github.com/CyanogenMod/" />
 	<remote name="tv" fetch="https://github.com/TeamVee/" />
+	<remote name="omni" fetch="https://github.com/omnirom/" />
 	<!-- Unofficial Builds -->
 	<remove-project name="CyanogenMod/android_packages_apps_CMUpdater" />
+	<remove-project name="CyanogenMod/android_packages_apps_Screencast" />
 	<!-- Use Custom HAL -->
-	<project path="hardware/qcom/display-caf/msm7x27a" name="android_hardware_qcom_display" revision="cm-12.1" remote="tv" />
-	<project path="hardware/qcom/media-caf/msm7x27a" name="android_hardware_qcom_media" revision="cm-12.1" remote="tv" />
+	<project path="hardware/qcom/display-caf/msm7x27a" name="android_hardware_qcom_display" revision="cm-13.0" remote="tv" />
+	<project path="hardware/qcom/media-caf/msm7x27a" name="android_hardware_qcom_media" revision="cm-13.0" remote="tv" />
 	<!-- Team Vee TWRP -->
-	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="cm-12.1" remote="tv" />
+	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="android-6.0" remote="omni" />
+	<project path="external/busybox" name="android_external_busybox" revision="cm-13.0" remote="cm" />
+	<!-- Stlport -->
+	<project path="external/stlport" name="android_external_stlport" revision="cm-13.0" remote="cm" />
+	<!-- GPS -->
+	<remove-project name="CyanogenMod/android_hardware_qcom_gps" />
+	<project path="hardware/qcom/gps" name="android_hardware_qcom_gps" revision="cm-13.0" remote="tv" />
+	<!-- RIL -->
+	<project path="hardware/ril-legacy" name="android_hardware_ril-legacy" revision="cm-13.0" remote="tv" />
 	<!-- Project Vee3/V1 -->
-	<project path="device/lge/vee3" name="android_device_lge_vee3" revision="cm-12.1" remote="tv" />
+	<project path="device/lge/vee3" name="android_device_lge_vee3" revision="cm-13.0" remote="tv" />
 	<!-- Project M4 -->
-	<project path="device/lge/e610" name="android_device_lge_e610" revision="cm-12.1" remote="tv" />
-	<project path="device/lge/msm7x27a-common" name="android_device_lge_msm7x27a-common" revision="cm-12.1" remote="tv" />
+	<project path="device/lge/e610" name="android_device_lge_e610" revision="cm-13.0" remote="tv" />
+	<project path="device/lge/msm7x27a-common" name="android_device_lge_msm7x27a-common" revision="cm-13.0" remote="tv" />
 	<!-- Common Projects -->
-	<project path="kernel/lge/msm7x27a-common" name="lge-kernel-lproj" revision="android-msm-3.4-kk" remote="thlg" />
-	<project path="vendor/lge" name="android_vendor_lge" revision="cm-12.1" remote="tv" />
+	<project path="kernel/lge/msm7x27a-common" name="lge-kernel-lproj" revision="cm-13.0" remote="tv" />
+	<project path="vendor/lge" name="android_vendor_lge" revision="cm-13.0" remote="tv" />
 </manifest>
