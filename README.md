@@ -1,16 +1,16 @@
-CM11.0 Manifests
+CM12.1 Manifests
 ========================
 Project M4 / Project Vee3 / Project V1
 
-Local manifests to build Android KitKat 4.4 to L5, L1II and L3II
+Local manifests to build Android LolliPop 5.1 to L5, L1II and L3II
 
-To initialize CM11.0 Repo:
+To initialize CM12.1 Repo:
 
-    repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0 -g all,-notdefault,-darwin
+    repo init -u git://github.com/CyanogenMod/android.git -b cm-12.1 -g all,-notdefault,-darwin
 
 To initialize Repo's:
 
-    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.github.com/TeamVee/android_.repo_local_manifests/cm-11.0/local_manifest.xml
+    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.github.com/TeamVee/android_.repo_local_manifests/cm-12.1/local_manifest.xml
 
 To sync:
 
@@ -20,8 +20,9 @@ To initialize the environment
 
     . build/envsetup.sh
 
-To build for L5:
+To build for L5, apply patchs and build:
 
+    sh device/lge/msm7x27a-common/patches/apply.sh
     brunch e610
 
 To build for L3 II, apply patchs and build:

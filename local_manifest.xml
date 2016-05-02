@@ -5,18 +5,17 @@
 	<remote name="tv" fetch="https://github.com/TeamVee/" />
 	<!-- Unofficial Builds -->
 	<remove-project name="CyanogenMod/android_packages_apps_CMUpdater" />
-	<remove-project name="CyanogenMod/android_prebuilt" />
-	<!-- THLG Display CAF -->
-	<remove-project name="CyanogenMod/android_hardware_qcom_display-caf" />
-	<project path="hardware/qcom/display-caf" name="android_hardware_qcom_display-caf" revision="cm-11.0" remote="thlg" />
+	<!-- Use Custom HAL -->
+	<project path="hardware/qcom/display-caf/msm7x27a" name="android_hardware_qcom_display" revision="cm-12.1" remote="tv" />
+	<project path="hardware/qcom/media-caf/msm7x27a" name="android_hardware_qcom_media" revision="cm-12.1" remote="tv" />
 	<!-- Team Vee TWRP -->
-	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="cm-11.0" remote="tv" />
+	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="cm-12.1" remote="tv" />
 	<!-- Project Vee3/V1 -->
-	<project path="device/lge/vee3" name="android_device_lge_vee3" revision="cm-11.0" remote="tv" />
+	<project path="device/lge/vee3" name="android_device_lge_vee3" revision="cm-12.1" remote="tv" />
 	<!-- Project M4 -->
-	<project path="device/lge/e610" name="android_device_lge_e610" revision="cm-11.0" remote="tv" />
-	<project path="device/lge/msm7x27a-common" name="android_device_lge_msm7x27a-common" revision="cm-11.0" remote="tv" />
+	<project path="device/lge/e610" name="android_device_lge_e610" revision="cm-12.1" remote="tv" />
+	<project path="device/lge/msm7x27a-common" name="android_device_lge_msm7x27a-common" revision="cm-12.1" remote="tv" />
 	<!-- Common Projects -->
 	<project path="kernel/lge/msm7x27a-common" name="lge-kernel-lproj" revision="android-msm-3.4-kk" remote="thlg" />
-	<project path="vendor/lge" name="android_vendor_lge" revision="cm-11.0" remote="tv" />
+	<project path="vendor/lge" name="android_vendor_lge" revision="cm-12.1" remote="tv" />
 </manifest>
