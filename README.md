@@ -10,7 +10,7 @@ To initialize CM13.0 Repo:
 
 To initialize Repo's:
 
-    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.github.com/TeamVee/android_.repo_local_manifests/cm-13.0-e610/local_manifest.xml
+    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.github.com/TeamVee/android_.repo_local_manifests/cm-13.0/local_manifest.xml
 
 To sync:
 
