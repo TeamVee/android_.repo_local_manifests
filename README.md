@@ -24,6 +24,10 @@ To build for L5:
 
     brunch e610
 
+To build for L7:
+
+    brunch p700
+
 To build for L3 II, apply patchs and build:
 
     sh device/lge/vee3/patches/apply.sh
