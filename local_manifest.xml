@@ -3,11 +3,9 @@
 	<!-- Remote names -->
 	<remote name="thlg" fetch="https://github.com/TeamHackLG/" />
 	<remote name="tv" fetch="https://github.com/TeamVee/" />
-	<!-- THLG Display CAF -->
-	<remove-project name="CyanogenMod/android_hardware_qcom_display-caf" />
-	<project path="hardware/qcom/display-caf" name="android_hardware_qcom_display-caf" revision="cm-11.0" remote="thlg" />
+	<remote name="omni" fetch="https://github.com/omnirom/" />
 	<!-- Team Vee TWRP -->
-	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="cm-11.0" remote="tv" />
+	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="android-6.0" remote="omni" />
 	<!-- Project Vee3/V1 -->
 	<project path="device/lge/vee3" name="android_device_lge_vee3" revision="cm-11.0" remote="tv" />
 	<!-- Project M4 -->

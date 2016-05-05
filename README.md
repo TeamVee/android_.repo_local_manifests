@@ -1,8 +1,8 @@
-CM11.0 Manifests
+TWRP3 Manifests
 ========================
 Project M4 / Project U0 / Project Vee3 / Project V1
 
-Local manifests to build Android KitKat 4.4 to L5, L7, L3II and L1II
+Local manifests to build TWRP 3 to L5, L7, L3II and L1II
 
 To initialize CM11.0 Repo:
 
@@ -10,7 +10,7 @@ To initialize CM11.0 Repo:
 
 To initialize Repo's:
 
-    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.github.com/TeamVee/android_.repo_local_manifests/cm-11.0/local_manifest.xml
+    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.github.com/TeamVee/android_.repo_local_manifests/twrp-3/local_manifest.xml
 
 To sync:
 
@@ -22,19 +22,21 @@ To initialize the environment
 
 To build for L5:
 
-    brunch e610
+    breakfast e610
+    make recoveryimage
 
 To build for L7:
 
-    brunch p700
+    breakfast p700
+    make recoveryimage
 
-To build for L3 II, apply patchs and build:
+To build for L3 II:
 
-    sh device/lge/vee3/patches/apply.sh
-    brunch vee3
+    breakfast vee3
+    make recoveryimage
 
-To build for L1 II, apply patchs, enable variable to v1 and build:
+To build for L1 II, enable variable to v1 and build:
 
-    sh device/lge/vee3/patches/apply.sh
     export TARGET_KERNEL_V1_BUILD_DEVICE=true
-    brunch vee3
+    breakfast vee3
+    make recoveryimage
