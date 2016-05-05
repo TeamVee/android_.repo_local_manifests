@@ -1,8 +1,8 @@
 CM12.1 Manifests
 ========================
-Project M4 / Project Vee3 / Project V1
+Project M4 / Project U0 / Project Vee3 / Project V1
 
-Local manifests to build Android LolliPop 5.1 to L5, L1II and L3II
+Local manifests to build Android LolliPop 5.1 to L5, L7, L3II and L1II
 
 To initialize CM12.1 Repo:
 
