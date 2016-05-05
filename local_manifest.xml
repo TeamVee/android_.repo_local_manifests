@@ -3,8 +3,6 @@
 	<!-- Remote names -->
 	<remote name="thlg" fetch="https://github.com/TeamHackLG/" />
 	<remote name="tv" fetch="https://github.com/TeamVee/" />
-	<!-- Unofficial Builds -->
-	<remove-project name="CyanogenMod/android_packages_apps_CMUpdater" />
 	<!-- Use Custom HAL -->
 	<project path="hardware/qcom/display-caf/msm7x27a" name="android_hardware_qcom_display" revision="cm-12.1" remote="tv" />
 	<project path="hardware/qcom/media-caf/msm7x27a" name="android_hardware_qcom_media" revision="cm-12.1" remote="tv" />
