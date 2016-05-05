@@ -1,8 +1,8 @@
 CM11.0 Manifests
 ========================
-Project M4 / Project Vee3 / Project V1
+Project M4 / Project U0 / Project Vee3 / Project V1
 
-Local manifests to build Android KitKat 4.4 to L5, L1II and L3II
+Local manifests to build Android KitKat 4.4 to L5, L7, L3II and L1II
 
 To initialize CM11.0 Repo:
 
