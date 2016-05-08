@@ -3,6 +3,8 @@
 	<!-- Remote names -->
 	<remote name="thlg" fetch="https://github.com/TeamHackLG/" />
 	<remote name="tv" fetch="https://github.com/TeamVee/" />
+	<!-- Unofficial Builds -->
+	<remove-project name="CyanogenMod/android_packages_apps_CMUpdater" />
 	<!-- THLG Display CAF -->
 	<remove-project name="CyanogenMod/android_hardware_qcom_display-caf" />
 	<project path="hardware/qcom/display-caf" name="android_hardware_qcom_display-caf" revision="cm-11.0" remote="thlg" />
