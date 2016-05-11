@@ -2,6 +2,8 @@
 <manifest>
 	<!-- Remote names -->
 	<remote name="tv" fetch="https://github.com/TeamVee/" />
+	<!-- Custom HAL -->
+	<project path="hardware/qcom/media-caf/msm7x27a" name="android_hardware_qcom_media" revision="cm-13.0" remote="tv" />
 	<!-- Project M4 -->
 	<project path="device/lge/e610" name="android_device_lge_e610" revision="cm-13.0" remote="tv" />
 	<!-- Project U0 -->
