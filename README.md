@@ -70,6 +70,6 @@ If building to L1II, use it:
 
     export TARGET_KERNEL_V1_BUILD_DEVICE=true
 
-... and build:
+... and build for L1II/L3II:
 
     brunch vee3
