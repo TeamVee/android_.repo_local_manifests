@@ -44,9 +44,9 @@ Initialize the environment:
 
 ---
 
-To build for L5/L7, apply patchs:
+Apply patchs for all devices:
 
-    sh device/lge/msm7x27a-common/patches/apply.sh
+    repopick 144710 144831
 
 ---
 
@@ -61,10 +61,6 @@ To build for L7:
     brunch p700
 
 ---
-
-To build for L1II/L3II, apply patchs:
-
-    sh device/lge/vee3/patches/apply.sh
 
 If building to L1II, use it:
 
