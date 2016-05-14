@@ -46,7 +46,7 @@ Initialize the environment:
 
 Apply patchs for all devices:
 
-    repopick 144710 144831
+    repopick 144710 144831 144976
 
 ---
 
