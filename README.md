@@ -62,10 +62,10 @@ To build for L7:
 
 ---
 
-If building to L1II, use it:
+To build for L1II:
 
-    export TARGET_KERNEL_V1_BUILD_DEVICE=true
+    TARGET_KERNEL_V1_BUILD_DEVICE=true brunch vee3
 
-... and build for L1II/L3II:
+To build for L3II:
 
     brunch vee3
