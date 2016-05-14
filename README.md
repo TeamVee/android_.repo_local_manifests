@@ -66,10 +66,12 @@ To build for L1II/L3II, apply patchs:
 
     sh device/lge/vee3/patches/apply.sh
 
-If building to L1II, use it:
+---
 
-    export TARGET_KERNEL_V1_BUILD_DEVICE=true
+To build for L1II:
 
-... and build for L1II/L3II:
+    TARGET_KERNEL_V1_BUILD_DEVICE=true brunch vee3
+
+To build for L3II:
 
     brunch vee3
