@@ -1,10 +1,10 @@
 #!/bin/bash
 # Generic Variables
-_android_version="5.1.1"
-_echo_android="LolliPop"
-_custom_android="cm-12.1"
+_android_version="6.0.1"
+_echo_android="MarshMallow"
+_custom_android="cm-13.0"
 _echo_custom_android="CyanogenMod"
-_echo_custom_android_version="12.1"
+_echo_custom_android_version="13"
 # Make loop for usage of 'break' to recursive exit
 while true
 do
@@ -208,7 +208,7 @@ do
 			* ) echo "exit"; break;;
 		esac
 		echo "$(tput setaf 1)---$(tput sgr0)"
-		sh device/lge/msm7x27a/patches/apply.sh
+		repopick 144710 144831 144976
 		if [ "$_device_build" == "e610" ]
 		then
 			echo "$(tput setaf 1)---$(tput sgr0)"
@@ -242,7 +242,7 @@ do
 			* ) echo "exit"; break;;
 		esac
 		echo "$(tput setaf 1)---$(tput sgr0)"
-		sh device/lge/vee3/patches/apply.sh
+		repopick 144710 144831 144976
 		if [ "$_device_build" == "vee3" ]
 		then
 			echo "$(tput setaf 1)---$(tput sgr0)"
