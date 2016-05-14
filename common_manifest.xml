@@ -7,8 +7,8 @@
 	<!-- Unofficial Builds -->
 	<remove-project name="CyanogenMod/android_packages_apps_CMUpdater" />
 	<!-- Custom HAL -->
-	<project path="hardware/qcom/display-caf/msm7x27a" name="android_hardware_qcom_display" revision="cm-13.0" remote="tv" />
-	<project path="hardware/qcom/media-caf/msm7x27a" name="android_hardware_qcom_media" revision="cm-13.0" remote="tv" />
+	<project path="hardware/qcom/display-caf/msm7x27a" name="android_hardware_qcom_display-caf_msm7x27a" revision="cm-13.0" remote="tv" />
+	<project path="hardware/qcom/media-caf/msm7x27a" name="android_hardware_qcom_media-caf_msm7x27a" revision="cm-13.0" remote="tv" />
 	<!-- TWRP -->
 	<project path="bootable/recovery-omni" name="android_bootable_recovery" revision="android-6.0" remote="omni" />
 	<project path="external/busybox" name="android_external_busybox" revision="cm-13.0" remote="cm" />
