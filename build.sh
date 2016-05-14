@@ -1,10 +1,10 @@
 #!/bin/bash
 # Generic Variables
-_android_version="4.4.4"
-_echo_android="KitKat"
-_custom_android="cm-11.0"
+_android_version="5.1.1"
+_echo_android="LolliPop"
+_custom_android="cm-12.1"
 _echo_custom_android="CyanogenMod"
-_echo_custom_android_version="11"
+_echo_custom_android_version="12.1"
 # Make loop for usage of 'break' to recursive exit
 while true
 do
@@ -207,6 +207,8 @@ do
 			3 ) echo "Building to L5/L7"; _device_build="e610"; _device_build="p700";;
 			* ) echo "exit"; break;;
 		esac
+		echo "$(tput setaf 1)---$(tput sgr0)"
+		sh device/lge/msm7x27a/patches/apply.sh
 		if [ "$_device_build" == "e610" ]
 		then
 			echo "$(tput setaf 1)---$(tput sgr0)"
