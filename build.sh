@@ -202,14 +202,14 @@ do
 		echo "$(tput setaf 1)---$(tput sgr0)"
 		read -p "$(tput setaf 5)---$(tput sgr0) Choice (1/2/3/ or * to exit): " -n 1 -s x
 		case "$x" in
-			1 ) echo "Building to L5"; _device_build="e610";;
-			2 ) echo "Building to L7"; _device_build="p700";;
-			3 ) echo "Building to L5/L7"; _device_build="e610"; _device_build="p700";;
+			1 ) echo "Building to L5"; _device_build1="e610";;
+			2 ) echo "Building to L7"; _device_build2="p700";;
+			3 ) echo "Building to L5/L7"; _device_build1="e610"; _device_build2="p700";;
 			* ) echo "exit"; break;;
 		esac
 		echo "$(tput setaf 1)---$(tput sgr0)"
 		sh device/lge/msm7x27a/patches/apply.sh
-		if [ "$_device_build" == "e610" ]
+		if [ "$_device_build1" == "e610" ]
 		then
 			echo "$(tput setaf 1)---$(tput sgr0)"
 			brunch e610
@@ -218,7 +218,7 @@ do
 				_device_failed
 			fi
 		fi
-		if [ "$_device_build" == "p700" ]
+		if [ "$_device_build2" == "p700" ]
 		then
 			echo "$(tput setaf 1)---$(tput sgr0)"
 			brunch p700
@@ -236,14 +236,14 @@ do
 		echo "$(tput setaf 1)---$(tput sgr0)"
 		read -p "$(tput setaf 4)---$(tput sgr0) Choice (1/2/3/ or * to exit): " -n 1 -s x
 		case "$x" in
-			1 ) echo "Building to L3II"; _device_build="vee3";;
-			2 ) echo "Building to L1II"; _device_build="v1";;
-			3 ) echo "Building to L3II/L1II"; _device_build="vee3"; _device_build="v1";;
+			1 ) echo "Building to L3II"; _device_build1="vee3";;
+			2 ) echo "Building to L1II"; _device_build2="v1";;
+			3 ) echo "Building to L3II/L1II"; _device_build1="vee3"; _device_build2="v1";;
 			* ) echo "exit"; break;;
 		esac
 		echo "$(tput setaf 1)---$(tput sgr0)"
 		sh device/lge/vee3/patches/apply.sh
-		if [ "$_device_build" == "vee3" ]
+		if [ "$_device_build1" == "vee3" ]
 		then
 			echo "$(tput setaf 1)---$(tput sgr0)"
 			brunch vee3
@@ -252,7 +252,7 @@ do
 				_device_failed
 			fi
 		fi
-		if [ "$_device_build" == "v1" ]
+		if [ "$_device_build2" == "v1" ]
 		then
 			echo "$(tput setaf 1)---$(tput sgr0)"
 			TARGET_KERNEL_V1_BUILD_DEVICE=true brunch vee3
@@ -273,8 +273,8 @@ do
 	echo "$(tput setaf 1)---$(tput sgr0) Thanks for using this script!"
 
 	# Unset variables
-	unset _option _echo_option0 _option1 _echo_option1 _android_version _echo_android
-	unset _custom_android _echo_custom_android _echo_custom_android_version _device _device_build
+	unset _option _echo_option0 _option1 _echo_option1 _android_version _echo_android _device_build1
+	unset _custom_android _echo_custom_android _echo_custom_android_version _device _device_build2
 
 	# Exit
 	break
