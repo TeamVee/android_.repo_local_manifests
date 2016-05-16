@@ -260,6 +260,7 @@ do
 	echo "$(tput setaf 1)---$(tput sgr0) For what device you want to build:"
 	if ! [ "$(ls -a device/lge/ | grep msm7x27a)" == "" ]
 	then
+		if [ "$_option2" == "enable" ]
 		then
 			echo "$(tput setaf 1)---$(tput sgr0)"
 			echo "$(tput setaf 1)---$(tput sgr0) Option$_echo_option2 found!"
