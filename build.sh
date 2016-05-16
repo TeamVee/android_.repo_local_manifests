@@ -38,6 +38,7 @@ do
 
 	# Name of script
 	echo "$(tput setaf 1)---$(tput sgr0) Live Android $_echo_android ($_android_version) - $_echo_custom_android $_echo_custom_android_version ($_custom_android) Sync and Build Script"
+	sleep 2
 
 	# Check option of user and transform to script
 	for _option in "$@"
@@ -66,9 +67,6 @@ do
 		if [[ "$_option" == "-f" || "$_option" == "--force" ]]
 		then
 			_option1="enable"
-			_echo_option1=" force"
-			_repo_forced="--force-sync"
-			_echo_repo_forced=" force-sync"
 		fi
 		# Choose device before choose
 		if ! [ "$_device" == "vee3" ]
@@ -76,21 +74,21 @@ do
 			if [[ "$_option" == "-l5" || "$_option" == "--e610" ]]
 			then
 				_option2="enable"
-				_echo_option2=" l5-only"
+				_echo_option2="l5-only"
 				_device="msm7x27a"
 				_device_build="e610"
 			fi
 			if [[ "$_option" == "-l7" || "$_option" == "--p700" ]]
 			then
 				_option2="enable"
-				_echo_option2=" l7-only"
+				_echo_option2="l7-only"
 				_device="msm7x27a"
 				_device_build="p700"
 			fi
 			if [[ "$_option" == "-gen1" || "$_option" == "--gen1" ]]
 			then
 				_option2="enable"
-				_echo_option2=" l5-and-l7"
+				_echo_option2="l5-and-l7"
 				_device="msm7x27a"
 				_device_build="e610-p700"
 			fi
@@ -100,21 +98,21 @@ do
 			if [[ "$_option" == "-l3ii" || "$_option" == "--vee3" ]]
 			then
 				_option2="enable"
-				_echo_option2=" l3ii-only"
+				_echo_option2="l3ii-only"
 				_device="vee3"
 				_device_build="vee3"
 			fi
 			if [[ "$_option" == "-l1ii" || "$_option" == "--v1" ]]
 			then
 				_option2="enable"
-				_echo_option2=" l1ii-only"
+				_echo_option2="l1ii-only"
 				_device="vee3"
 				_device_build="v1"
 			fi
 			if [[ "$_option" == "-gen2" || "$_option" == "--gen2" ]]
 			then
 				_option2="enable"
-				_echo_option2=" l3ii-and-l1ii"
+				_echo_option2="l3ii-and-l1ii"
 				_device="vee3"
 				_device_build="vee3-v1"
 			fi
@@ -123,7 +121,6 @@ do
 		if [[ "$_option" == "-b" || "$_option" == "--bypass" ]]
 		then
 			_option3="enable"
-			_echo_option3=" bypass"
 		fi
 	done
 
@@ -141,9 +138,8 @@ do
 	}
 
 	_unset(){
-		unset _option _option1 _echo_option1 _option2 _echo_option2 _option3 _echo_option3
-		unset _android_version _echo_android _custom_android _echo_custom_android _echo_custom_android_version
-		unset _repo_forced _echo_repo_forced _device _device_build
+		unset _option _option1 _option2 _echo_option2 _option3 _device _device_build
+		unset _android_version _echo_custom_android_version _echo_android _custom_android _echo_custom_android 
 	}
 
 	# Exit if option is 'help'
@@ -152,10 +148,6 @@ do
 		unset _option_help
 		break
 	fi
-
-	# Echo option to user
-	echo "$(tput setaf 1)---$(tput sgr0) Using option: default$_echo_option1$_echo_option2$_echo_option3"
-	sleep 2
 
 	# Repo Sync
 	echo "$(tput setaf 1)---$(tput sgr0)"
@@ -174,8 +166,8 @@ do
 	if [ "$_option2" == "enable" ]
 	then
 		echo "$(tput setaf 1)---$(tput sgr0)"
-		echo "$(tput setaf 1)---$(tput sgr0) Option '$_device' found!"
-		echo "$(tput setaf 2)---$(tput sgr0) Using $_device manifest without ask!"
+		echo "$(tput setaf 1)---$(tput sgr0) Option '$_echo_option2' found!"
+		echo "$(tput setaf 2)---$(tput sgr0) Using $_echo_option2 manifest without ask!"
 	else
 		echo "$(tput setaf 1)---$(tput sgr0)"
 		echo "$(tput setaf 1)---$(tput sgr0) Choose Devices Manifest to download:"
@@ -234,8 +226,15 @@ do
 	echo "$(tput setaf 1)---$(tput sgr0)"
 	echo "$(tput setaf 1)---$(tput sgr0) Starting Sync of:"
 	echo "$(tput setaf 2)---$(tput sgr0) Android $_echo_android ($_android_version) - $_echo_custom_android $_echo_custom_android_version ($_custom_android)"
-	echo "$(tput setaf 1)---$(tput sgr0) Using option: default$_echo_repo_forced"
-	_if_fail_break "repo sync -q $_repo_forced"
+	if [ "$_option1" == "enable" ]
+	then
+		echo "$(tput setaf 1)---$(tput sgr0)"
+		echo "$(tput setaf 1)---$(tput sgr0) Option 'force' found!"
+		echo "$(tput setaf 2)---$(tput sgr0) Using 'repo sync' with '--force-sync'!"
+		_if_fail_break "repo sync -q --force-sync"
+	else
+		_if_fail_break "repo sync -q"
+	fi
 
 	# Builing Android
 	echo "$(tput setaf 1)---$(tput sgr0)"
@@ -263,7 +262,7 @@ do
 		if [ "$_option2" == "enable" ]
 		then
 			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 1)---$(tput sgr0) Option$_echo_option2 found!"
+			echo "$(tput setaf 1)---$(tput sgr0) Option $_echo_option2 found!"
 			echo "$(tput setaf 2)---$(tput sgr0) Using $_device_build device without ask!"
 		else
 			echo "$(tput setaf 1)---$(tput sgr0)"
