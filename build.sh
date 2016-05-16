@@ -57,6 +57,8 @@ do
 		then
 			_option1="enable"
 			_echo_option1=" force"
+			_repo_forced="--force-sync"
+			_echo_repo_forced1=" forced-sync"
 		fi
 	done
 
@@ -112,6 +114,7 @@ do
 	# Remove old Manifest of Android Tree
 	if [ "$_option1" == "enable" ]
 	then
+		echo "$(tput setaf 1)---$(tput sgr0)"
 		echo "$(tput setaf 1)---$(tput sgr0) Option 'force' found!"
 		echo "$(tput setaf 2)---$(tput sgr0) Removing old Manifest before download new one"
 		rm -rf .repo/manifests .repo/manifests.git .repo/manifest.xml
@@ -159,7 +162,8 @@ do
 	echo "$(tput setaf 1)---$(tput sgr0)"
 	echo "$(tput setaf 1)---$(tput sgr0) Starting Sync of:"
 	echo "$(tput setaf 2)---$(tput sgr0) Android $_echo_android ($_android_version) - $_echo_custom_android $_echo_custom_android_version ($_custom_android)"
-	repo sync -q
+	echo "$(tput setaf 1)---$(tput sgr0) Using option:$_echo_option0_echo_repo_forced1"
+	repo sync -q $_repo_forced
 	if ! [ "$?" == "0" ]
 	then
 		echo "$(tput setaf 1)---$(tput sgr0) Sync Failed!"
