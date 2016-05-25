@@ -4,6 +4,7 @@
 	<remote name="tv" fetch="https://github.com/TeamVee/" />
 	<!-- Unofficial Builds -->
 	<remove-project name="CyanogenMod/android_packages_apps_Screencast" />
+	<remove-project name="CyanogenMod/android_packages_apps_Eleven" />
 	<!-- Project Vee3/V1 -->
 	<project path="device/lge/vee3" name="android_device_lge_vee3" revision="cm-13.0" remote="tv" />
 </manifest>
