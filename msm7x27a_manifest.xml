@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 	<!-- Remote names -->
-	<remote name="tv" fetch="https://github.com/TeamVee/" />
+	<remote name="thlg" fetch="https://github.com/TeamHackLG/" />
 	<!-- Project M4 -->
-	<project path="device/lge/e610" name="android_device_lge_e610" revision="cm-11.0" remote="tv" />
+	<project path="device/lge/e610" name="android_device_lge_e610" revision="cm-11.0" remote="thlg" />
 	<!-- Project U0 -->
-	<project path="device/lge/p700" name="android_device_lge_p700" revision="cm-11.0" remote="tv" />
+	<project path="device/lge/p700" name="android_device_lge_p700" revision="cm-11.0" remote="thlg" />
 	<!-- Common Project -->
-	<project path="device/lge/msm7x27a-common" name="android_device_lge_msm7x27a-common" revision="cm-11.0" remote="tv" />
+	<project path="device/lge/msm7x27a-common" name="android_device_lge_msm7x27a-common" revision="cm-11.0" remote="thlg" />
 </manifest>
