@@ -279,7 +279,6 @@ do
 			esac
 		fi
 		echo "$(tput setaf 1)---$(tput sgr0)"
-		repopick 144710 144831 144976
 		if [ "$_device_build" == "e610" ]
 		then
 			_if_fail_break "brunch e610"
@@ -315,7 +314,6 @@ do
 			esac
 		fi
 		echo "$(tput setaf 1)---$(tput sgr0)"
-		repopick 144710 144831 144976
 		if [ "$_device_build" == "vee3" ]
 		then
 			export TARGET_KERNEL_V1_BUILD_DEVICE=false
