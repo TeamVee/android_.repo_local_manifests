@@ -1,353 +1,249 @@
 #!/bin/bash
 # Generic Variables
-_android_version="6.0.1"
-_echo_android="MarshMallow"
+_android="6.0.1"
+_android_version="MarshMallow"
 _custom_android="cm-13.0"
-_echo_custom_android="CyanogenMod"
-_echo_custom_android_version="13"
+_custom_android_version="CyanogenMod13.0"
+_github_custom_android_place="CyanogenMod"
+_github_device_place="TeamVee"
 # Make loop for usage of 'break' to recursive exit
 while true
 do
+	_unset_and_stop() {
+		unset _device _device_build _device_echo
+		break
+	}
+
+	_if_fail_break() {
+		${1}
+		if ! [ "${?}" == "0" ]
+		then
+			echo "  |"
+			echo "  | Something failed!"
+			echo "  | Exiting from script!"
+			_unset_and_stop
+		fi
+	}
+
+	# Unset devices variables for not have any problem
+	unset _device _device_build _device_echo
+
 	# Check if is using 'BASH'
 	if [ ! "${BASH_VERSION}" ]
 	then
-		echo "$(tput setaf 1)---$(tput sgr0) Please do not use 'sh' to run this script"
-		echo "$(tput setaf 2)---$(tput sgr0) Just use 'source build.sh'"
-		echo "$(tput setaf 3)---$(tput sgr0) Exiting from script!"
-		break
+		echo "  |"
+		echo "  | Please do not use 'sh' to run this script"
+		echo "  | Just use 'source build.sh'"
+		echo "  | Exiting from script!"
+		_unset_and_stop
 	fi
 
 	# Check if 'repo' is installed
 	if [ ! "$(which repo)" ]
 	then
-		echo "$(tput setaf 1)---$(tput sgr0) You will need to install 'repo'"
-		echo "$(tput setaf 2)---$(tput sgr0) Check in this link:"
-		echo "$(tput setaf 3)---$(tput sgr0) <https://source.android.com/source/downloading.html>"
-		echo "$(tput setaf 4)---$(tput sgr0) Exiting from script!"
-		break
+		echo "  |"
+		echo "  | You will need to install 'repo'"
+		echo "  | Check in this link:"
+		echo "  | <https://source.android.com/source/downloading.html>"
+		echo "  | Exiting from script!"
+		_unset_and_stop
 	fi
 
 	# Check if 'curl' is installed
 	if [ ! "$(which curl)" ]
 	then
-		echo "$(tput setaf 1)---$(tput sgr0) You will need 'curl'"
-		echo "$(tput setaf 2)---$(tput sgr0) Use 'sudo apt-get install curl' to install 'curl'"
-		echo "$(tput setaf 3)---$(tput sgr0) Exiting from script!"
-		break
+		echo "  |"
+		echo "  | You will need 'curl'"
+		echo "  | Use 'sudo apt-get install curl' to install 'curl'"
+		echo "  | Exiting from script!"
+		_unset_and_stop
 	fi
 
 	# Name of script
-	echo "$(tput setaf 1)---$(tput sgr0) Live Android $_echo_android ($_android_version) - $_echo_custom_android $_echo_custom_android_version ($_custom_android) Sync and Build Script"
-	sleep 2
+	echo "  |"
+	echo "  | Live Android Sync and Build Script"
+	echo "  | For Android ${_android_version} (${_android}) | ${_custom_android_version} (${_custom_android})"
 
 	# Check option of user and transform to script
-	for _option in "$@"
+	for _u2t in "${@}"
 	do
-		if [[ "$_option" == "-h" || "$_option" == "--help" ]]
+		if [[ "${_u2t}" == "-h" || "${_u2t}" == "--help" ]]
 		then
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 1)---$(tput sgr0) Usage:"
-			echo "$(tput setaf 2)---$(tput sgr0) -h    | --help   | To show this message"
-			echo "$(tput setaf 3)---$(tput sgr0) -f    | --force  | Force redownload of Android Tree Manifest"
-			echo "$(tput setaf 4)---$(tput sgr0) -b    | --bypass | To bypass message 'Press any key'"
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 2)---$(tput sgr0) -l5   | --e610   | To build only for L5/e610"
-			echo "$(tput setaf 3)---$(tput sgr0) -l7   | --p700   | To build only for L7/p700"
-			echo "$(tput setaf 4)---$(tput sgr0) -gen1 | --gen1   | To build for L5 and L7"
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 2)---$(tput sgr0) -l3ii | --vee3   | To build only for L3II/vee3"
-			echo "$(tput setaf 3)---$(tput sgr0) -l1ii | --v1     | To build only for L1II/v1"
-			echo "$(tput setaf 4)---$(tput sgr0) -gen2 | --gen2   | To build for L3II and L1II"
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 1)---$(tput sgr0) Tip: Use '-b' if using one of options above"
-			_option_help="enable"
-			break
+			echo "  |"
+			echo "  | Usage:"
+			echo "  | -h    | --help  | To show this message"
+			echo "  |"
+			echo "  | -l5   | --e610  | To build only for L5/e610"
+			echo "  | -l7   | --p700  | To build only for L7/p700"
+			echo "  | -gen1 | --gen1  | To build for L5 and L7"
+			echo "  |"
+			echo "  | -l1ii | --v1    | To build only for L1II/v1"
+			echo "  | -l3ii | --vee3  | To build only for L3II/vee3"
+			echo "  | -gen2 | --gen2  | To build for L1II and L3II"
+			_option_exit="enable"
+			_unset_and_stop
 		fi
-		# Force redownload of android tree
-		if [[ "$_option" == "-f" || "$_option" == "--force" ]]
+		# Choose device before menu
+		if [[ "${_u2t}" == "-l5" || "${_u2t}" == "--e610" ]]
 		then
-			_option1="enable"
+			_device="gen1"
+			_device_build="e610"
+			_device_echo="L5"
 		fi
-		# Choose device before choose
-		if ! [ "$_device" == "vee3" ]
+		if [[ "${_u2t}" == "-l7" || "${_u2t}" == "--p700" ]]
 		then
-			if [[ "$_option" == "-l5" || "$_option" == "--e610" ]]
-			then
-				_option2="enable"
-				_echo_option2="l5-only"
-				_device="msm7x27a"
-				_device_build="e610"
-			fi
-			if [[ "$_option" == "-l7" || "$_option" == "--p700" ]]
-			then
-				_option2="enable"
-				_echo_option2="l7-only"
-				_device="msm7x27a"
-				_device_build="p700"
-			fi
-			if [[ "$_option" == "-gen1" || "$_option" == "--gen1" ]]
-			then
-				_option2="enable"
-				_echo_option2="l5-and-l7"
-				_device="msm7x27a"
-				_device_build="e610-p700"
-			fi
+			_device="gen1"
+			_device_build="p700"
+			_device_echo="L7"
 		fi
-		if ! [ "$_device" == "msm7x27a" ]
+		if [[ "${_u2t}" == "-gen1" || "${_u2t}" == "--gen1" ]]
 		then
-			if [[ "$_option" == "-l3ii" || "$_option" == "--vee3" ]]
-			then
-				_option2="enable"
-				_echo_option2="l3ii-only"
-				_device="vee3"
-				_device_build="vee3"
-			fi
-			if [[ "$_option" == "-l1ii" || "$_option" == "--v1" ]]
-			then
-				_option2="enable"
-				_echo_option2="l1ii-only"
-				_device="vee3"
-				_device_build="v1"
-			fi
-			if [[ "$_option" == "-gen2" || "$_option" == "--gen2" ]]
-			then
-				_option2="enable"
-				_echo_option2="l3ii-and-l1ii"
-				_device="vee3"
-				_device_build="vee3-v1"
-			fi
+			_device="gen1"
+			_device_build="gen1"
+			_device_echo="All Gen1"
 		fi
-		# Force redownload of android tree
-		if [[ "$_option" == "-b" || "$_option" == "--bypass" ]]
+		if [[ "${_u2t}" == "-l1ii" || "${_u2t}" == "--v1" ]]
 		then
-			_option3="enable"
+			_device="gen2"
+			_device_build="v1"
+			_device_echo="L1II"
+		fi
+		if [[ "${_u2t}" == "-l3ii" || "${_u2t}" == "--vee3" ]]
+		then
+			_device="gen2"
+			_device_build="vee3"
+			_device_echo="L3II"
+		fi
+		if [[ "${_u2t}" == "-gen2" || "${_u2t}" == "--gen2" ]]
+		then
+			_device="gen2"
+			_device_build="gen2"
+			_device_echo="All Gen2"
 		fi
 	done
 
-	_if_fail_break() {
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		$1
-		if ! [ "$?" == "0" ]
-		then
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 1)---$(tput sgr0) Something failed!"
-			echo "$(tput setaf 2)---$(tput sgr0) Exiting from script!"
-			_unset
-			break
-		fi
-	}
-
-	_unset(){
-		unset _option _option1 _option2 _echo_option2 _option3 _device _device_build
-		unset _android_version _echo_custom_android_version _echo_android _custom_android _echo_custom_android 
-	}
-
 	# Exit if option is 'help'
-	if [ "$_option_help" == "enable" ]
+	if [ "${_option_exit}" == "enable" ]
 	then
-		unset _option_help
-		break
+		unset _option_exit
+		_unset_and_stop
 	fi
 
 	# Repo Sync
-	echo "$(tput setaf 1)---$(tput sgr0)"
-	echo "$(tput setaf 1)---$(tput sgr0) Starting Sync of Android Tree Manifest"
-	echo "$(tput setaf 2)---$(tput sgr0) $_echo_custom_android $_echo_custom_android_version ($_custom_android)"
-	if [ "$_option3" == "enable" ]
-	then
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		echo "$(tput setaf 1)---$(tput sgr0) Option 'bypass' found!"
-		echo "$(tput setaf 2)---$(tput sgr0) Resuming without ask!"
-	else
-		read -p "$(tput setaf 3)---$(tput sgr0) Press any key to continue!" -n 1
-	fi
+	echo "  |"
+	echo "  | Starting Sync of Android Tree Manifest"
 
 	# Device Choice
-	if [ "$_option2" == "enable" ]
+	echo "  |"
+	echo "  | Choose Manifest to download:"
+	echo "  | 1 | First Generation Devices  | LG Optimus L5/L7 (NoNFC)"
+	echo "  | 2 | Second Generation Devices | LG Optimus L3II/L1II"
+	echo "  |"
+	if [ "${_device}" == "" ]
 	then
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		echo "$(tput setaf 1)---$(tput sgr0) Option '$_echo_option2' found!"
-		echo "$(tput setaf 2)---$(tput sgr0) Using $_echo_option2 manifest without ask!"
-	else
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		echo "$(tput setaf 1)---$(tput sgr0) Choose Devices Manifest to download:"
-		echo "$(tput setaf 2)---$(tput sgr0) 1) MSM7x27a | LG Optimus L5/L7 (L5 NoNFC/L7 NoNFC)"
-		echo "$(tput setaf 3)---$(tput sgr0) 2) Vee3 | LG Optimus L3II/L1II (L3II Single/Dual/L1II Single/Dual)"
-		if ! [ "$(ls -a .repo/local_manifests/ | grep common_manifest.xml)" == "" ]
-		then
-			if ! [ "$(ls -a .repo/local_manifests/ | grep msm7x27a_manifest.xml)" == "" ]
-			then
-				echo "$(tput setaf 1)---$(tput sgr0)"
-				echo "$(tput setaf 1)---$(tput sgr0) Current is: 1) L5/L7"
-			elif ! [ "$(ls -a .repo/local_manifests/ | grep vee3_manifest.xml)" == "" ]
-			then
-				echo "$(tput setaf 1)---$(tput sgr0)"
-				echo "$(tput setaf 1)---$(tput sgr0) Current is: 2) L3II/L1II"
-			fi
-		fi
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		read -p "$(tput setaf 4)---$(tput sgr0) Choice (1/ 2/ or any key to exit): " -n 1 -s x
-		case "$x" in
-			1 ) echo "L5/L7"; _device="msm7x27a";;
-			2 ) echo "L3II/L1II"; _device="vee3";;
-			* ) echo "exit"; break;;
+		read -p "  | Choice | 1/ 2/ or any key to exit | " -n 1 -s x
+		case "${x}" in
+			1) _device="gen1";;
+			2) _device="gen2";;
+			*) echo "${x} | Exiting from script!"; _unset_and_stop;;
 		esac
 	fi
+	echo "  | Using ${_device}_manifest.xml"
 
 	# Remove old Manifest of Android Tree
-	if [ "$_option1" == "enable" ]
-	then
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		echo "$(tput setaf 1)---$(tput sgr0) Option 'force' found!"
-		echo "$(tput setaf 2)---$(tput sgr0) Removing old Manifest before download new one"
-		rm -rf .repo/manifests .repo/manifests.git .repo/manifest.xml
-	fi
+	echo "  |"
+	echo "  | Removing old Manifest before download new one"
+	rm -rf .repo/manifests .repo/manifests.git .repo/manifest.xml .repo/local_manifests/
 
 	# Initialization of Android Tree
-	echo "$(tput setaf 1)---$(tput sgr0)"
-	echo "$(tput setaf 1)---$(tput sgr0) Downloading Android Tree Manifest of branch $_custom_android"
-	_if_fail_break "repo init -u git://github.com/"$_echo_custom_android"/android.git -b "$_custom_android" -g all,-notdefault,-darwin"
+	echo "  |"
+	echo "  | Downloading Android Tree Manifest from ${_github_custom_android_place} (${_custom_android})"
+	_if_fail_break "repo init -u git://github.com/${_github_custom_android_place}/android.git -b ${_custom_android} -g all,-notdefault,-darwin"
 
 	# Device manifest download
-	rm -rf .repo/local_manifests/
-	echo "$(tput setaf 1)---$(tput sgr0)"
-	echo "$(tput setaf 1)---$(tput sgr0) Downloading $_device manifest of branch $_custom_android"
-	_if_fail_break "curl -# --create-dirs -L -o .repo/local_manifests/"$_device"_manifest.xml -O -L https://raw.github.com/TeamVee/android_.repo_local_manifests/"$_custom_android"/"$_device"_manifest.xml"
-
-	# Common device manifest download
-	if [[ "$_device" == "vee3" || "$_device" == "msm7x27a" ]]
-	then
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		echo "$(tput setaf 1)---$(tput sgr0) Downloading Common $_device manifest of branch $_custom_android"
-		_if_fail_break "curl -# --create-dirs -L -o .repo/local_manifests/common_manifest.xml -O -L https://raw.github.com/TeamVee/android_.repo_local_manifests/"$_custom_android"/common_manifest.xml"
-	fi
-
-	# Real 'repo sync'
-	echo "$(tput setaf 1)---$(tput sgr0)"
-	echo "$(tput setaf 1)---$(tput sgr0) Starting Sync of:"
-	echo "$(tput setaf 2)---$(tput sgr0) Android $_echo_android ($_android_version) - $_echo_custom_android $_echo_custom_android_version ($_custom_android)"
-	if [ "$_option1" == "enable" ]
-	then
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		echo "$(tput setaf 1)---$(tput sgr0) Option 'force' found!"
-		echo "$(tput setaf 2)---$(tput sgr0) Using 'repo sync' with '--force-sync'!"
-		_if_fail_break "repo sync -q --force-sync"
-	else
-		_if_fail_break "repo sync -q"
-	fi
-
-	# Builing Android
-	echo "$(tput setaf 1)---$(tput sgr0)"
-	echo "$(tput setaf 1)---$(tput sgr0) Starting Android Building!"
-	echo "$(tput setaf 2)---$(tput sgr0) $_echo_custom_android $_echo_custom_android_version ($_custom_android)"
-	if [ "$_option3" == "enable" ]
-	then
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		echo "$(tput setaf 1)---$(tput sgr0) Option 'bypass' found!"
-		echo "$(tput setaf 2)---$(tput sgr0) Resuming without ask!"
-	else
-		read -p "$(tput setaf 3)---$(tput sgr0) Press any key to continue!" -n 1
-	fi
+	echo "  |"
+	echo "  | Downloading ${_device}_manifest.xml and msm7x27a_manifest.xml"
+	echo "  | From ${_github_device_place} (${_custom_android})"
+	_if_fail_break "curl -# --create-dirs -L -o .repo/local_manifests/${_device}_manifest.xml -O -L https://raw.github.com/${_github_device_place}/android_.repo_local_manifests/${_custom_android}/${_device}_manifest.xml"
+	_if_fail_break "curl -# --create-dirs -L -o .repo/local_manifests/msm7x27a_manifest.xml -O -L https://raw.github.com/${_github_device_place}/android_.repo_local_manifests/${_custom_android}/msm7x27a_manifest.xml"
 
 	# Initialize environment
-	echo "$(tput setaf 1)---$(tput sgr0)"
-	echo "$(tput setaf 4)---$(tput sgr0) Initialize the environment"
+	echo "  |"
+	echo "  | Initializing the environment"
+	_if_fail_break "source build/envsetup.sh"
+
+	# Real 'repo sync'
+	echo "  |"
+	echo "  | Starting Sync:"
+	_if_fail_break "reposync -q --force-sync"
+
+	# Initialize environment
+	echo "  |"
+	echo "  | Initializing the environment"
 	_if_fail_break "source build/envsetup.sh"
 
 	# Another device choice
-	echo "$(tput setaf 1)---$(tput sgr0)"
-	echo "$(tput setaf 1)---$(tput sgr0) For what device you want to build:"
-	if ! [ "$(ls -a device/lge/ | grep msm7x27a)" == "" ]
+	echo "  |"
+	echo "  | For what device you want to build:"
+	echo "  |"
+	if [ "${_device}" == "gen1" ]
 	then
-		if [ "$_option2" == "enable" ]
+		echo "  | 1 | LG Optimus L5 NoNFC | E610 E612 E617"
+		echo "  | 2 | LG Optimus L7 NoNFC | P700 P705"
+		echo "  | 3 | All First Generation devices"
+		echo "  |"
+		if [ "${_device_build}" == "" ]
 		then
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 1)---$(tput sgr0) Option $_echo_option2 found!"
-			echo "$(tput setaf 2)---$(tput sgr0) Using $_device_build device without ask!"
-		else
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 2)---$(tput sgr0) 1) LG Optimus L5 NoNFC | E610 E612 E617"
-			echo "$(tput setaf 3)---$(tput sgr0) 2) LG Optimus L7 NoNFC | P700 P705"
-			echo "$(tput setaf 4)---$(tput sgr0) 3) Both options above"
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			read -p "$(tput setaf 5)---$(tput sgr0) Choice (1/2/3/ or * to exit): " -n 1 -s x
-			case "$x" in
-				1 ) echo "Building to L5"; _device_build="e610";;
-				2 ) echo "Building to L7"; _device_build="p700";;
-				3 ) echo "Building to L5/L7"; _device_build="e610-p700";;
-				* ) echo "exit"; break;;
+			read -p "  | Choice | 1/2/3/ or * to exit | " -n 1 -s x
+			case "${x}" in
+				1) _device_build="e610" _device_echo="L5";;
+				2) _device_build="p700" _device_echo="L7";;
+				3) _device_build="gen1" _device_echo="All Gen1";;
+				*) echo "${x} | Exiting from script!"; _unset_and_stop;;
 			esac
 		fi
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		if [ "$_device_build" == "e610" ]
-		then
-			_if_fail_break "brunch e610"
-		fi
-		if [ "$_device_build" == "p700" ]
-		then
-			_if_fail_break "brunch p700"
-		fi
-		if [ "$_device_build" == "e610-p700" ]
-		then
-			_if_fail_break "brunch e610"
-			_if_fail_break "brunch p700"
-		fi
-	elif ! [ "$(ls -a device/lge/ | grep vee3)" == "" ]
+	elif [ "${_device}" == "gen2" ]
 	then
-		if [ "$_option2" == "enable" ]
+		echo "  | 1 | LG Optimus L1II Single Dual | E410 E411 E415 E420"
+		echo "  | 2 | LG Optimus L3II Single Dual | E425 E430 E431 E435"
+		echo "  | 3 | All Second Generation devices"
+		echo "  |"
+		if [ "${_device_build}" == "" ]
 		then
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 1)---$(tput sgr0) Option$_echo_option2 found!"
-			echo "$(tput setaf 2)---$(tput sgr0) Using $_device_build device without ask!"
-		else
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			echo "$(tput setaf 1)---$(tput sgr0) 1) LG Optimus L3II Single Dual | E425 E430 E431 E435"
-			echo "$(tput setaf 2)---$(tput sgr0) 2) LG Optimus L1II Single Dual | E410 E411 E415 E420"
-			echo "$(tput setaf 3)---$(tput sgr0) 3) Both options above"
-			echo "$(tput setaf 1)---$(tput sgr0)"
-			read -p "$(tput setaf 4)---$(tput sgr0) Choice (1/2/3/ or * to exit): " -n 1 -s x
-			case "$x" in
-				1 ) echo "Building to L3II"; _device_build="vee3";;
-				2 ) echo "Building to L1II"; _device_build="v1";;
-				3 ) echo "Building to L3II/L1II"; _device_build="vee3-v1";;
-				* ) echo "exit"; break;;
+			read -p "  | Choice | 1/2/3/ or * to exit | " -n 1 -s x
+			case "${x}" in
+				1) _device_build="v1" _device_echo="L1II";;
+				2) _device_build="vee3" _device_echo="L3II";;
+				3) _device_build="gen2" _device_echo="All Gen2";;
+				*) echo "${x} | Exiting from script!"; _unset_and_stop;;
 			esac
 		fi
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		if [ "$_device_build" == "vee3" ]
-		then
-			export TARGET_KERNEL_V1_BUILD_DEVICE=false
-			_if_fail_break "brunch vee3"
-			unset TARGET_KERNEL_V1_BUILD_DEVICE
-		fi
-		if [ "$_device_build" == "v1" ]
-		then
-			export TARGET_KERNEL_V1_BUILD_DEVICE=true
-			_if_fail_break "brunch vee3"
-			unset TARGET_KERNEL_V1_BUILD_DEVICE
-		fi
-		if [ "$_device_build" == "vee3-v1" ]
-		then
-			export TARGET_KERNEL_V1_BUILD_DEVICE=false
-			_if_fail_break "brunch vee3"
-			export TARGET_KERNEL_V1_BUILD_DEVICE=true
-			_if_fail_break "brunch vee3"
-			unset TARGET_KERNEL_V1_BUILD_DEVICE
-		fi
-	else
-		echo "$(tput setaf 1)---$(tput sgr0)"
-		echo "$(tput setaf 1)---$(tput sgr0) No device folder found!"
-		echo "$(tput setaf 2)---$(tput sgr0) Exiting from script!"
-		break
+	fi
+	echo "  | Building to ${_device_echo}"
+	# Builing Android
+	echo "  |"
+	echo "  | Starting Android Building!"
+	if [[ "${_device_build}" == "e610" || "${_device_build}" == "gen1" ]]
+	then
+		_if_fail_break "brunch e610"
+	fi
+	if [[ "${_device_build}" == "p700" || "${_device_build}" == "gen1" ]]
+	then
+		_if_fail_break "brunch p700"
+	fi
+	if [[ "${_device_build}" == "v1" || "${_device_build}" == "gen2" ]]
+	then
+		_if_fail_break "TARGET_KERNEL_V1_BUILD_DEVICE=true brunch vee3"
+	fi
+	if [[ "${_device_build}" == "vee3" || "${_device_build}" == "gen2" ]]
+	then
+		_if_fail_break "TARGET_KERNEL_V1_BUILD_DEVICE=false brunch vee3"
 	fi
 
-	# Goodbye!
-	echo "$(tput setaf 1)---$(tput sgr0)"
-	echo "$(tput setaf 1)---$(tput sgr0) Thanks for using this script!"
-
-	# Unset variables
-	_unset
-
 	# Exit
-	break
+	_unset_and_stop
 done
+
+# Goodbye!
+echo "  |"
+echo "  | Thanks for using this script!"
